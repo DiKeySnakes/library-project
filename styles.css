@@ -1,5 +1,240 @@
 @import 'normalize.css';
 
+:root {
+  --main-white: #f0f0f0;
+  --main-black: #303841;
+  --main-blue: rgba(48, 43, 99, 0.8);
+  --main-text-shadow: 0.5rem 0.5rem 0.25rem rgba(0, 0, 0, 0.75);
+  --main-box-shadow: 2.5rem 2.5rem 1.25rem 0rem rgba(0, 0, 0, 0.75);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 62.5%;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  background: #0f0c29; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 0.25rem solid black;
+  border-radius: 1rem;
+  z-index: 10;
+  background-color: var(--main-white);
+  width: 500px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.25rem solid black;
+}
+
+.modal-header .title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 1rem 1.5rem;
+  font-size: 1.8rem;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+}
+
+input,
+select {
+  height: 3rem;
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem auto;
+}
+
+.header {
+  width: 80%;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#title-icon {
+  font-size: 4rem;
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+}
+
+h1 {
+  font-size: 4rem;
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+}
+
+.new-book {
+  width: 12rem;
+  height: 4rem;
+  background-color: var(--main-blue);
+  font-size: 1.8rem;
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+table {
+  font-size: 2rem;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td,
+th {
+  border: 1px solid var(--main-white);
+  text-align: left;
+  padding: 8px;
+  color: var(--main-white);
+}
+
+th {
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+  background-color: var(--main-blue);
+}
+
+tr:nth-child(even) {
+  background-color: var(--main-blue);
+}
+
+.delete-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--main-white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.delete-button:hover {
+  transform: scale(1.3);
+}
+
+.status-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--main-white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.status-button:hover {
+  transform: scale(1.3);
+}
+
+#footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 30rem auto 2.4rem auto;
+  text-align: center;
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+}
+
+#footer a {
+  text-decoration: none;
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+}
+
+#footer a:hover {
+  text-decoration: underline;
+  color: var(--main-white);
+  text-shadow: var(--main-text-shadow);
+}
+
+#icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+#icon:hover {
+  transform: rotate(360deg) scale(1.2);
 }

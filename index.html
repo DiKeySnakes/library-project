@@ -5,8 +5,291 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/63a987d3b1.js"
+      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div class="title">
+          <i id="title-icon" class="fa-solid fa-book-open-reader"></i
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+          <h1>Library</h1>
+        </div>
+        <button data-modal-target="#modal" class="new-book">New Book</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Published</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A Game of Thrones</td>
+            <td>George R. R. Martin</td>
+            <td>694</td>
+            <td>1996</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>A Clash of Kings</td>
+            <td>George R. R. Martin</td>
+            <td>761</td>
+            <td>1998</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>A Storm of Swords</td>
+            <td>George R. R. Martin</td>
+            <td>973</td>
+            <td>2000</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>A Feast for Crows</td>
+            <td>George R. R. Martin</td>
+            <td>753</td>
+            <td>2005</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>A Dance with Dragons</td>
+            <td>George R. R. Martin</td>
+            <td>1016</td>
+            <td>2011</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>The Princess and the Queen</td>
+            <td>George R. R. Martin</td>
+            <td>107</td>
+            <td>2013</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>The Sons of the Dragon</td>
+            <td>George R. R. Martin</td>
+            <td>76</td>
+            <td>2017</td>
+            <td>
+              <button
+                data-status-button
+                class="status-button"
+                title="Change status">
+                <i class="fa-solid fa-book"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                data-delete-button
+                class="delete-button"
+                title="Remove the book from the library">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">Add New Book</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="/" method="get">
+          <div class="input-box">
+            <label for="title" title="Letters and numbers only">TITLE</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              title="Please fill out this field"
+              pattern="[a-zA-Z0-9]+"
+              size="30"
+              min="1"
+              max="245"
+              placeholder="Letters and numbers only"
+              required />
+          </div>
+          <div class="input-box">
+            <label for="author" title="Letters only">AUTHOR</label>
+            <input
+              type="text"
+              name="author"
+              id="author"
+              title="Please fill out this field"
+              pattern="^[^0-9]+$"
+              size="30"
+              min="1"
+              max="245"
+              placeholder="Letters only"
+              required />
+          </div>
+          <div class="input-box">
+            <label for="pages" title="Numbers only">PAGES</label>
+            <input
+              type="number"
+              name="pages"
+              id="pages"
+              title="Please fill out this field"
+              pattern="[0-9]"
+              size="30"
+              min="1"
+              placeholder="Numbers only"
+              required />
+          </div>
+          <div class="input-box">
+            <label for="published" title="Numbers only">PUBLISHED</label>
+            <input
+              type="number"
+              name="published"
+              id="published"
+              title="Please fill out this field"
+              pattern="[0-9]"
+              size="30"
+              min="1"
+              step="1"
+              placeholder="Numbers only"
+              required />
+          </div>
+          <div class="input-box">
+            <label for="status">STATUS</label>
+            <select id="status" name="status">
+              <option value="unread">Unread</option>
+              <option value="read">Read</option>
+            </select>
+          </div>
+          <div class="input-box">
+            <button data-submit-button type="submit">Add Book</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="footer">
+      <footer>
+        <p>
+          Created by DiKeySnakes for
+          <a href="https://theodinproject.com/" target="_blank"
+            >The Odin Project</a
+          >
+          curriculum
+        </p>
+        <p>
+          Copyright &copy; DiKeySnakes 2022
+          <a
+            href="https://github.com/DiKeySnakes/library-project"
+            target="_blank"
+            ><i id="icon" class="fa-brands fa-github"></i
+          ></a>
+        </p>
+      </footer>
+    </div>
+    <div id="overlay"></div>
+  </body>
 </html>
