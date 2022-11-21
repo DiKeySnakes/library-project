@@ -37,162 +37,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>A Game of Thrones</td>
-            <td>George R. R. Martin</td>
-            <td>694</td>
-            <td>1996</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>A Clash of Kings</td>
-            <td>George R. R. Martin</td>
-            <td>761</td>
-            <td>1998</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>A Storm of Swords</td>
-            <td>George R. R. Martin</td>
-            <td>973</td>
-            <td>2000</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>A Feast for Crows</td>
-            <td>George R. R. Martin</td>
-            <td>753</td>
-            <td>2005</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>A Dance with Dragons</td>
-            <td>George R. R. Martin</td>
-            <td>1016</td>
-            <td>2011</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>The Princess and the Queen</td>
-            <td>George R. R. Martin</td>
-            <td>107</td>
-            <td>2013</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>The Sons of the Dragon</td>
-            <td>George R. R. Martin</td>
-            <td>76</td>
-            <td>2017</td>
-            <td>
-              <button
-                data-status-button
-                class="status-button"
-                title="Change status">
-                <i class="fa-solid fa-book"></i>
-              </button>
-            </td>
-            <td>
-              <button
-                data-delete-button
-                class="delete-button"
-                title="Remove the book from the library">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody id="tbody"></tbody>
         <tfoot></tfoot>
       </table>
     </div>
@@ -202,7 +47,8 @@
         <button data-close-button class="close-button">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="/" method="get">
+        <div id="errorMsg"></div>
+        <form id="form" action="/" method="get">
           <div class="input-box">
             <label for="title" title="Letters and numbers only">TITLE</label>
             <input
@@ -210,7 +56,7 @@
               name="title"
               id="title"
               title="Please fill out this field"
-              pattern="[a-zA-Z0-9]+"
+              pattern="^[a-zA-Z0-9 ]*$"
               size="30"
               min="1"
               max="245"
@@ -259,8 +105,8 @@
               required />
           </div>
           <div class="input-box">
-            <label for="status">STATUS</label>
-            <select id="status" name="status">
+            <label for="readStatus">STATUS</label>
+            <select id="readStatus" name="readStatus">
               <option value="unread">Unread</option>
               <option value="read">Read</option>
             </select>
