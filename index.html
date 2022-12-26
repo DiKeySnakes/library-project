@@ -35,6 +35,7 @@
             <th>Published</th>
             <th>Status</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -137,5 +138,29 @@
       </footer>
     </div>
     <div id="overlay"></div>
+
+    <template id="book-row-template">
+      <tr data-book-id>
+        <td data-book-title></td>
+        <td data-book-author></td>
+        <td data-book-pages></td>
+        <td data-book-published></td>
+        <td data-book-read-status></td>
+        <td>
+          <i
+            data-status-button
+            id="status-button"
+            class="fa-solid fa-book status-button"
+            title="Click to change status"></i>
+        </td>
+        <td>
+          <i
+            data-delete-button
+            id="delete-button"
+            class="fa-solid fa-trash-can delete-button"
+            title="Remove the book from the library"></i>
+        </td>
+      </tr>
+    </template>
   </body>
 </html>

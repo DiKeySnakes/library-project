@@ -5,8 +5,10 @@ const overlay = document.getElementById('overlay');
 const form = document.getElementById('form');
 const errorMsg = document.getElementById('errorMsg');
 const tableBody = document.getElementById('tbody');
+const bookRowTemplate = document.getElementById('book-row-template');
 const defaultBooks = [
   {
+    id: '1671973451191',
     title: 'A Game of Thrones',
     author: 'George R. R. Martin',
     pages: '694',
@@ -14,6 +16,7 @@ const defaultBooks = [
     readStatus: 'unread',
   },
   {
+    id: '1671973451192',
     title: 'A Clash of Kings',
     author: 'George R. R. Martin',
     pages: '761',
@@ -21,6 +24,7 @@ const defaultBooks = [
     readStatus: 'unread',
   },
   {
+    id: '1671973451193',
     title: 'A Storm of Swords',
     author: 'George R. R. Martin',
     pages: '973',
@@ -28,6 +32,7 @@ const defaultBooks = [
     readStatus: 'unread',
   },
   {
+    id: '1671973451194',
     title: 'A Feast for Crows',
     author: 'George R. R. Martin',
     pages: '753',
@@ -35,6 +40,7 @@ const defaultBooks = [
     readStatus: 'unread',
   },
   {
+    id: '1671973451195',
     title: 'A Dance with Dragons',
     author: 'George R. R. Martin',
     pages: '1016',
@@ -42,6 +48,7 @@ const defaultBooks = [
     readStatus: 'unread',
   },
   {
+    id: '1671973451196',
     title: 'The Princess and the Queen',
     author: 'George R. R. Martin',
     pages: '107',
@@ -49,6 +56,7 @@ const defaultBooks = [
     readStatus: 'unread',
   },
   {
+    id: '1671973451197',
     title: 'The Sons of the Dragon',
     author: 'George R. R. Martin',
     pages: '76',
@@ -59,6 +67,7 @@ const defaultBooks = [
 
 class Book {
   constructor(title, author, pages, published, readStatus) {
+    this.id = Date.now().toString();
     this.title = title.trim();
     this.author = author.trim();
     this.pages = parseInt(pages);
@@ -78,12 +87,12 @@ class Library {
     }
   }
 
-  removeBook(title) {
-    this.books = this.books.filter((book) => book.title !== title);
+  removeBook(id) {
+    this.books = this.books.filter((book) => book.id !== id);
   }
 
-  getBook(title) {
-    return this.books.find((book) => book.title === title);
+  getBook(id) {
+    return this.books.find((book) => book.id === id);
   }
 
   isInLibrary(newBook) {
@@ -110,29 +119,19 @@ const resetBooksTable = () => {
 };
 
 const addTableRow = (book) => {
-  const bookRow = document.createElement('tr');
-  bookRow.innerHTML = `<td>${book.title}</td>
-  <td>${book.author}</td>
-  <td>${book.pages}</td>
-  <td>${book.published}</td>
-  <td>
-    <button
-      onclick="changeReadStatus()"
-      id="status-button"
-      class="status-button"
-      title="Double click to change status">
-      <i class="fa-solid fa-book"></i>
-    </button>&nbsp;${book.readStatus}
-  </td>
-  <td>
-    <button
-      onclick="removeBook()"
-      id="delete-button"
-      class="delete-button"
-      title="Remove the book from the library">
-      <i class="fa-solid fa-trash-can"></i>
-    </button>
-  </td>`;
+  const bookRow = document.importNode(bookRowTemplate.content, true);
+  const bookId = bookRow.querySelector('[data-book-id]');
+  bookId.id = book.id;
+  const bookTitle = bookRow.querySelector('[data-book-title]');
+  bookTitle.textContent = book.title;
+  const bookAuthor = bookRow.querySelector('[data-book-author]');
+  bookAuthor.textContent = book.author;
+  const bookPages = bookRow.querySelector('[data-book-pages]');
+  bookPages.textContent = book.pages;
+  const bookPublished = bookRow.querySelector('[data-book-published]');
+  bookPublished.textContent = book.published;
+  const bookStatus = bookRow.querySelector('[data-book-read-status]');
+  bookStatus.textContent = book.readStatus;
   tableBody.appendChild(bookRow);
 };
 
@@ -159,39 +158,26 @@ const addBook = (e) => {
   form.reset();
 };
 
-const removeBook = () => {
-  tableBody.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const currentTarget = e.target;
-    const title =
-      e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
-    if (currentTarget.classList.contains('fa-trash-can')) {
-      library.removeBook(title);
-      updateBooksTable();
+tableBody.addEventListener('click', (e) => {
+  const currentTarget = e.target;
+  const currentBookId = currentTarget.parentNode.parentNode.id;
+  console.log(currentBookId);
+  if (currentTarget.classList.contains('fa-trash-can')) {
+    library.removeBook(currentBookId);
+    updateBooksTable();
+  }
+  if (currentTarget.classList.contains('fa-book')) {
+    const book = library.getBook(currentBookId);
+    if (book.readStatus === 'read') {
+      book.readStatus = 'unread';
+    } else {
+      book.readStatus = 'read';
     }
-  });
-};
-
-const changeReadStatus = () => {
-  tableBody.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const currentTarget = e.target;
-    const title =
-      e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
-    console.log(e.target);
-    if (currentTarget.classList.contains('fa-book')) {
-      const book = library.getBook(title);
-      if (book.readStatus === 'read') {
-        book.readStatus = 'unread';
-      } else {
-        book.readStatus = 'read';
-      }
-      updateBooksTable();
-    }
-  });
-};
+    updateBooksTable();
+  } else {
+    return;
+  }
+});
 
 updateBooksTable();
 
