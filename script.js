@@ -6,6 +6,8 @@ const form = document.getElementById('form');
 const errorMsg = document.getElementById('errorMsg');
 const tableBody = document.getElementById('tbody');
 const bookRowTemplate = document.getElementById('book-row-template');
+const LOCAL_STORAGE_LIBRARY = 'library.books';
+let books = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIBRARY)) || [];
 const defaultBooks = [
   {
     id: '1671973451191',
@@ -65,6 +67,10 @@ const defaultBooks = [
   },
 ];
 
+const save = () => {
+  localStorage.setItem(LOCAL_STORAGE_LIBRARY, JSON.stringify(books));
+};
+
 class Book {
   constructor(title, author, pages, published, readStatus) {
     this.id = Date.now().toString();
@@ -104,6 +110,7 @@ const library = new Library();
 
 const updateBooksTable = () => {
   resetBooksTable();
+  library.books = books;
   if (library.books.length === 0) {
     for (let book of defaultBooks) {
       library.books.push(book);
@@ -112,6 +119,8 @@ const updateBooksTable = () => {
   for (let book of library.books) {
     addTableRow(book);
   }
+  save();
+  console.log(library.books);
 };
 
 const resetBooksTable = () => {
@@ -154,6 +163,7 @@ const addBook = (e) => {
   }
   library.addBook(newBook);
   updateBooksTable();
+  save();
   closeModal(modal);
   form.reset();
 };
@@ -161,10 +171,11 @@ const addBook = (e) => {
 tableBody.addEventListener('click', (e) => {
   const currentTarget = e.target;
   const currentBookId = currentTarget.parentNode.parentNode.id;
-  console.log(currentBookId);
   if (currentTarget.classList.contains('fa-trash-can')) {
     library.removeBook(currentBookId);
+    books = library.books;
     updateBooksTable();
+    save();
   }
   if (currentTarget.classList.contains('fa-book')) {
     const book = library.getBook(currentBookId);
@@ -174,6 +185,7 @@ tableBody.addEventListener('click', (e) => {
       book.readStatus = 'read';
     }
     updateBooksTable();
+    save();
   } else {
     return;
   }
